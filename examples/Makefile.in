@@ -79,8 +79,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 target_triplet = @target@
-bin_PROGRAMS = basic$(EXEEXT) automata$(EXEEXT) time$(EXEEXT) \
-	random$(EXEEXT)
+bin_PROGRAMS = basic$(EXEEXT) automata$(EXEEXT) time$(EXEEXT)
 subdir = examples
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
@@ -104,9 +103,6 @@ am__v_lt_1 =
 am_basic_OBJECTS = basic.$(OBJEXT)
 basic_OBJECTS = $(am_basic_OBJECTS)
 basic_DEPENDENCIES = ../src/libmc.a
-am_random_OBJECTS = random.$(OBJEXT)
-random_OBJECTS = $(am_random_OBJECTS)
-random_DEPENDENCIES = ../src/libmc.a ../src/libtime.la
 am_time_OBJECTS = time.$(OBJEXT)
 time_OBJECTS = $(am_time_OBJECTS)
 time_DEPENDENCIES = ../src/libmc.a
@@ -144,10 +140,8 @@ AM_V_CCLD = $(am__v_CCLD_@AM_V@)
 am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(random_SOURCES) \
-	$(time_SOURCES)
-DIST_SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(random_SOURCES) \
-	$(time_SOURCES)
+SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(time_SOURCES)
+DIST_SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(time_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -296,8 +290,6 @@ basic_SOURCES = basic.c
 basic_LDADD = ../src/libmc.a
 time_SOURCES = time.c
 time_LDADD = ../src/libmc.a
-random_SOURCES = random.c
-random_LDADD = ../src/libmc.a ../src/libtime.la
 automata_SOURCES = automata.c
 automata_LDADD = ../src/libmc.a
 all: all-am
@@ -392,10 +384,6 @@ basic$(EXEEXT): $(basic_OBJECTS) $(basic_DEPENDENCIES) $(EXTRA_basic_DEPENDENCIE
 	@rm -f basic$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(basic_OBJECTS) $(basic_LDADD) $(LIBS)
 
-random$(EXEEXT): $(random_OBJECTS) $(random_DEPENDENCIES) $(EXTRA_random_DEPENDENCIES) 
-	@rm -f random$(EXEEXT)
-	$(AM_V_CCLD)$(LINK) $(random_OBJECTS) $(random_LDADD) $(LIBS)
-
 time$(EXEEXT): $(time_OBJECTS) $(time_DEPENDENCIES) $(EXTRA_time_DEPENDENCIES) 
 	@rm -f time$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(time_OBJECTS) $(time_LDADD) $(LIBS)
@@ -408,7 +396,6 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/automata.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/basic.Po@am__quote@
-@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/random.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/time.Po@am__quote@
 
 .c.o:
