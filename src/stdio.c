@@ -25,7 +25,7 @@ size_t fwrite(const void *array, size_t size, size_t count, FILE *stream)
 int puts(const char* s)
 {
     if(s == NULL) return -1;
-    int ret = write(0, s, strlen(s));
+    int ret = write(1, s, strlen(s));
     write(1, "\n", 1);
     return ret;
 }
