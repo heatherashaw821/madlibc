@@ -1,4 +1,4 @@
-libmc_a-stdio.o: stdio.c /usr/include/stdc-predef.h ../include/stdio.h \
+libmc_a-stdio.o: stdio.c /usr/include/stdc-predef.h ../include/string.h \
  ../include/stdlib.h /usr/include/elf.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
@@ -30,11 +30,11 @@ libmc_a-stdio.o: stdio.c /usr/include/stdc-predef.h ../include/stdio.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h ../include/madmath.h \
- ../include/madconsole.h ../include/string.h ../include/stdarg.h
+ ../include/madconsole.h ../include/stdio.h ../include/stdarg.h
 
 /usr/include/stdc-predef.h:
 
-../include/stdio.h:
+../include/string.h:
 
 ../include/stdlib.h:
 
@@ -118,6 +118,6 @@ libmc_a-stdio.o: stdio.c /usr/include/stdc-predef.h ../include/stdio.h \
 
 ../include/madconsole.h:
 
-../include/string.h:
+../include/stdio.h:
 
 ../include/stdarg.h:

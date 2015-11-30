@@ -4,11 +4,6 @@
 #include <stdlib.h>
 
 extern void* memset(void* s, int c, size_t n);
-extern void* malloc(size_t size);
-extern void free(void* ptr);
-extern void* calloc(size_t nmemb, size_t size);
-extern void* realloc(void* ptr, size_t size);
-
 extern void* memmove(void* dest, const void* src, size_t n);
 extern void *memcpy(void* dest, const void* src, size_t n);
 extern void bcopy(const void* src, void* dest, size_t n);

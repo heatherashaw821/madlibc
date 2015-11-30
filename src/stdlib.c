@@ -442,6 +442,23 @@ int pselect (int __nfds, fd_set *__restrict __readfds,
     return (__timeout->tv_sec & __timeout->tv_nsec) == 0 ? 0 : -1;
 }
 
+///!!!!!!!!!!!!!!!!!!!!!!!!!!! MEMORY AND I/O !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+void* malloc(size_t size)
+{
+    void* request = sbrk(size);
+    if(request == (void*) -1)
+        return NULL;
+    return request;
+}
+
+void free(void* ptr)
+{
+    
+}
+
+void* calloc(size_t nmemb, size_t size);
+void* realloc(void* ptr, size_t size);
 
 
 ///!!!!!!!!!!!!!!!!!!!!!!!!!!! PRNG FUNCTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

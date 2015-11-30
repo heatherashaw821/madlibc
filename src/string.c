@@ -54,23 +54,7 @@ char* itoa(intmax_t n, unsigned int base, bool signess)
     return s;
 }
 
-///!!!!!!!!!!!!!!!!!!!!!!!!!!! MEMORY AND I/O !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-void* malloc(size_t size)
-{
-    void* request = sbrk(size);
-    if(request == (void*) -1)
-        return NULL;
-    return request;
-}
-
-void free(void* ptr)
-{
-    
-}
-
-void* calloc(size_t nmemb, size_t size);
-void* realloc(void* ptr, size_t size);
+///!!!!!!!!!!!!!!!!!!!!!!!!!!! STRING FUNCTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 void* memset(void* s, int c, size_t n)
 {

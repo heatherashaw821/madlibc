@@ -5,8 +5,8 @@
 // this stuff is worth it, you can buy me a shot of scotch in return
 ////////////////////////////////////////////////////////////////////////////////
 
-#include <stdio.h>
 #include <string.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
 

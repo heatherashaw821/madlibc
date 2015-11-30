@@ -72,6 +72,11 @@ extern intmax_t __syscall6(intmax_t a,intmax_t b,intmax_t c,intmax_t d,intmax_t 
     M__syscall3, M__syscall2, M__syscall1)(__VA_ARGS__)
 
 
+extern void* malloc(size_t size);
+extern void free(void* ptr);
+extern void* calloc(size_t nmemb, size_t size);
+extern void* realloc(void* ptr, size_t size);
+
 extern void __attribute__((noreturn)) exit(int __e);
 extern const char* envpv(const char** envp, const char* key);
 
