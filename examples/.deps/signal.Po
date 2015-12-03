@@ -37,7 +37,7 @@ signal.o: signal.c /usr/include/stdc-predef.h ../include/stdlib.h \
  /usr/include/x86_64-linux-gnu/bits/sigstack.h \
  /usr/include/x86_64-linux-gnu/sys/ucontext.h \
  /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
- /usr/include/x86_64-linux-gnu/bits/sigthread.h
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h ../include/string.h
 
 /usr/include/stdc-predef.h:
 
@@ -144,3 +144,5 @@ signal.o: signal.c /usr/include/stdc-predef.h ../include/stdlib.h \
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
 /usr/include/x86_64-linux-gnu/bits/sigthread.h:
+
+../include/string.h:

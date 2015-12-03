@@ -46,7 +46,6 @@ void __default_rt_sa_restorer(void)
     syscall(__NR_rt_sigreturn, NULL);
 }
 
-// When RT signals are in use we need to use a different return stub.  
 #ifdef __NR_rt_sigreturn
 #define choose_restorer(flags) \
   (flags & SA_SIGINFO) ? __default_rt_sa_restorer : __default_sa_restorer
@@ -54,8 +53,7 @@ void __default_rt_sa_restorer(void)
 #define choose_restorer(flags) __default_sa_restorer
 #endif
 
-// If ACT is not NULL, change the action for SIG to *ACT.
-//   If OACT is not NULL, put the old action for SIG in *OACT.  
+
 int sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
 {
     int result;
@@ -78,10 +76,7 @@ int sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
             kact.sa_flags |= SA_RESTORER;
         }
 # endif
-    }
-
-//     XXX The size argument hopefully will have to be changed to the
-//       real size of the user-level sigset_t.  
+    } 
     result = syscall(__NR_rt_sigaction, sig, (act ? &kact : NULL),
 	    (oact ? &koact : NULL), _NSIG / 8);
     if (oact && result >= 0)

@@ -9,10 +9,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <signal.h>
+#include <string.h>
 
 void interupt(int signum)
 {
-    printf("\nCaught: %s\n", signum == SIGINT ? "SIGINT" : signum == SIGTERM ? "SIGTERM" : "Unknown");
+    printf("\nCaught: %s\n", signum == SIGINT ? "SIGINT" : signum == SIGTERM ? "SIGTERM" : itoa(signum, 10, false));
     _exit(0);
 }
 
