@@ -72,17 +72,17 @@ int sigaction(int sig, const struct sigaction *act, struct sigaction *oact)
         }
         else
         {
-            kact.sa_restorer = choose_restorer (kact.sa_flags);
+            kact.sa_restorer = choose_restorer(kact.sa_flags);
             kact.sa_flags |= SA_RESTORER;
         }
 # endif
     } 
     result = syscall(__NR_rt_sigaction, sig, (act ? &kact : NULL),
 	    (oact ? &koact : NULL), _NSIG / 8);
-    if (oact && result >= 0)
+    if(oact && result >= 0)
     {
         oact->sa_handler = koact.k_sa_handler;
-        memcpy(&oact->sa_mask, &koact.sa_mask, sizeof (sigset_t));
+        memcpy(&oact->sa_mask, &koact.sa_mask, sizeof(sigset_t));
         oact->sa_flags = koact.sa_flags;
     
 # ifdef HAVE_SA_RESTORER
