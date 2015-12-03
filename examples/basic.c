@@ -10,6 +10,16 @@
 #include <string.h>
 #include <stdio.h>
 
+void type(char* s)
+{
+    int i;
+    for(i = 0;i <= strlen(s);i++)
+    {
+        printf("%s%s%c%s", RESET, GREEN, s[i], RESET);
+        usleep(1000*300);
+    }
+}
+
 int main(int argc, const char** argv, const char** envp)
 {
     pid_t pid;
@@ -17,20 +27,13 @@ int main(int argc, const char** argv, const char** envp)
     {
         if(pid != 0)
             exit(0);
+        else
+            usleep(800000);
     }
     else
         perror("fork");
-    sleep(2);
     
-    int i;
-    const char* m = "The Matrix has you neo...";
-    for(i = 0;i <= strlen(m);i++)
-    {
-        //printf("%s%s%c", RESET, GREEN, m[i]);
-        putch(m[i]);
-        usleep(1000*500);
-    }
-        
+    type("The Matrix has you neo...");
     return 0;
 }
 

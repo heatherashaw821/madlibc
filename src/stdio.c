@@ -84,7 +84,13 @@ int puts(const char* s)
 
 
 char* __printf_f_s(void* p){ return p; }
-char* __printf_f_c(void* p){ return (char[]) {(intmax_t) p, 0}; }
+char* __printf_f_c(char p)
+{
+    char* o = malloc(2);
+    o[0] = p;
+    o[1] = 0; 
+    return o;
+}
 char* __printf_f_i(void* p){ return itoa((intmax_t) p, 10, true); }
 char* __printf_f_u(void* p){ return itoa((intmax_t) p, 10, false); }
 char* __printf_f_x(void* p){ return itoa((intmax_t) p, 16, false); }
@@ -93,7 +99,7 @@ char* __printf_f_b(void* p){ return itoa((intmax_t) p, 2, false); }
 char format_flags[25] = "sciuxb";
 char* (*printf_fun_array[25]) (void*) = {
         __printf_f_s,
-        __printf_f_c,
+        (typeof(*printf_fun_array)) __printf_f_c,
         __printf_f_i,
         __printf_f_u,
         __printf_f_x,

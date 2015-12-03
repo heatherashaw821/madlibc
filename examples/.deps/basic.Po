@@ -30,7 +30,7 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h ../include/madmath.h \
  ../include/madconsole.h ../include/madmacro.h ../include/string.h \
- ../include/stdio.h /usr/include/xlocale.h
+ ../include/stdio.h
 
 /usr/include/stdc-predef.h:
 
@@ -121,5 +121,3 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
 ../include/string.h:
 
 ../include/stdio.h:
-
-/usr/include/xlocale.h:

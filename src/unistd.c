@@ -48,7 +48,6 @@ int          pipe(int [2]);
 ssize_t      pread(int, void *, size_t, off_t);
 int          pthread_atfork(void (*)(void), void (*)(void), void(*)(void));
 ssize_t      pwrite(int, const void *, size_t, off_t);
-ssize_t      read(int, void *, size_t);
 int          readlink(const char *, char *, size_t);
 int          setgid(gid_t);
 int          setpgid(pid_t, pid_t);
@@ -263,8 +262,12 @@ unsigned int sleep(unsigned int seconds)
 }
 
 
-ssize_t write(int fildes, const void *buf, size_t nbyte)
+ssize_t write(int fildes, const void* buf, size_t nbyte)
 {
     return syscall(__NR_write, fildes, buf, nbyte);
 }
 
+ssize_t read(int fildes, void* buf, size_t nbyte)
+{
+    return syscall(__NR_read, fildes, buf, nbyte);
+}
