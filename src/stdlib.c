@@ -38,7 +38,7 @@ void __libc_csu_fini(int e)
     while(i--)
         (*__fini_array_start[i])();
     _fini();
-    exit(e);
+    _exit(e);
 }
 
 void __libc_init(int argc, const char** argv, const char** envp)
@@ -262,7 +262,7 @@ const char* envpv(const char** envp, const char* key)
 
 void __attribute__((noreturn)) exit(int e)
 {
-    syscall(__NR_exit, e);
+    __libc_csu_fini(e);
     __builtin_unreachable();
 }
 

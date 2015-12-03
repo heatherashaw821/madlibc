@@ -33,18 +33,12 @@ void fini(void)
     printf("%s", SHOW_CURSOR);
 }
 
-static void handler(int signum)
-{
-    fini();
-    _exit(0);
-}
-
 void init(int argc, char** argv, char** envp)
 {
     if(argc != 2)
         usage(argv);
     printf("%s", HIDE_CURSOR);
-    signal(SIGINT, handler);
+    signal(SIGINT, exit);
 }
 
 

@@ -14,7 +14,7 @@
 void interupt(int signum)
 {
     printf("\nCaught: %s\n", signum == SIGINT ? "SIGINT" : signum == SIGTERM ? "SIGTERM" : itoa(signum, 10, false));
-    _exit(0);
+    exit(0);
 }
 
 int __attribute__ ((noreturn)) main()
