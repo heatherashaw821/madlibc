@@ -31,7 +31,6 @@ typedef enum { false, true } bool;
 
 #define null 0
 
-typedef void (*fun_ptr) (void);
 #define lambda(type, body) ({ type lambda body lambda; })
 
 #define STR_MAX_LENGTH	1024
