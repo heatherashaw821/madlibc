@@ -13,8 +13,20 @@ int main(int argc, const char** argv, const char** envp)
 {
     printf("%s %x %x %x\n", "\nWOOT", atoi("0b1111000011110000"), atoi("0xbadc0DE"), 0xdeadbeef);
     
-    chroot("./");
-    perror("chroot");
+    pid_t pid;
+    if((pid = fork()) >= 0)
+    {
+        if(pid == 0)
+        {
+            sleep(1);
+            printf("child\n");
+        }
+        else
+            printf("parent\n");
+    }
+    else
+        perror("fork");
+    sleep(2);
     
     return 0;
 }

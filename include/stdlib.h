@@ -67,7 +67,7 @@ extern intmax_t __syscall6(intmax_t a,intmax_t b,intmax_t c,intmax_t d,intmax_t 
 #define GET_MACRO(_0,_1,_2,_3,_4,_5,_6,NAME,...) NAME
  
 #define syscall(...) GET_MACRO(__VA_ARGS__, M__syscall6, M__syscall5, M__syscall4, \
-    M__syscall3, M__syscall2, M__syscall1)(__VA_ARGS__)
+    M__syscall3, M__syscall2, M__syscall1,M__syscall0)(__VA_ARGS__)
 
 
 extern int *__errno_location(void);

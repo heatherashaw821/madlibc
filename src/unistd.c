@@ -14,7 +14,6 @@
 int          fchown(int, uid_t, gid_t);
 int          fchdir(int);
 int          fdatasync(int);
-pid_t        fork(void);
 long int     fpathconf(int, int);
 int          fsync(int);
 int          ftruncate(int, off_t);
@@ -68,7 +67,6 @@ int          truncate(const char *, off_t);
 char        *ttyname(int);
 int          ttyname_r(int, char *, size_t);
 useconds_t   ualarm(useconds_t, useconds_t);
-pid_t        vfork(void);
 */
 
 
@@ -92,6 +90,11 @@ char* ctermid(char* s)
     return NULL;
 }
 */
+
+pid_t fork(void)
+{
+    return syscall(__NR_fork);
+}
 
 char *optarg;
 int optind, opterr, optopt;

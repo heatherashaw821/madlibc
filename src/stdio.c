@@ -56,8 +56,6 @@ const char* const sys_errlist[] = {
     NULL
 };
 
-int sys_nerr;
-
 
 int fputch(FILE* stream, char c)
 {
