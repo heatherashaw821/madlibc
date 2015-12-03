@@ -6,9 +6,9 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 
-#include <stdlib.h>
 #include <stdarg.h>
-
+#include <stdlib.h>
+#include <assert.h>
 
 /*
 int          fchown(int, uid_t, gid_t);
@@ -96,7 +96,6 @@ char* ctermid(char* s)
 char *optarg;
 int optind, opterr, optopt;
 
-
 void __attribute__ ((noreturn)) _exit(int __status)
 {
     syscall(__NR_exit, __status);
@@ -110,32 +109,32 @@ int access(const char* pathname, int mode)
 
 int chdir(const char* path)
 {
-    return (errno = syscall(__NR_chdir, path)) != 0 ? -1 : 0;
+    return syscall(__NR_chdir, path) < 0 ? -1 : 0;
 }
 
 int chroot(const char* path)
 {
-    return (errno = syscall(__NR_chroot, path)) != 0 ? -1 : 0;
+    return syscall(__NR_chroot, path) < 0 ? -1 : 0;
 }
 
 int chown(const char* pathname, uid_t owner, gid_t group)
 {
-    return (errno = syscall(__NR_chown, pathname, owner, group)) != 0 ? -1 : 0;
+    return syscall(__NR_chown, pathname, owner, group) < 0 ? -1 : 0;
 }
 
 int close(int fd)
 {
-    return (errno = syscall(__NR_close, fd)) != 0 ? -1 : 0;
+    return syscall(__NR_close, fd) < 0 ? -1 : 0;
 }
 
 int dup(int oldfd)
 {
-    return (errno = syscall(__NR_dup, oldfd) > 0 ? errno : -1);
+    return syscall(__NR_dup, oldfd) < 0 ? -1 : 0;
 }
 
 int dup2(int oldfd, int newfd)
 {
-    return (errno = syscall(__NR_dup, oldfd, newfd) > 0 ? errno : -1);
+    return syscall(__NR_dup, oldfd, newfd) < 0 ? -1 : 0;
 }
 
 int execv(const char *path, char *const argv[])
@@ -214,7 +213,7 @@ unsigned int alarm(unsigned int seconds)
 
 int brk(void* addr)
 {
-    return syscall(__NR_brk, 0) != syscall(__NR_brk, addr) ? -1 : 0;
+    return syscall(__NR_brk, 0) != syscall(__NR_brk, addr) ? 0 : -1;
 }
 
 void* sbrk(intptr_t increment)
@@ -222,17 +221,18 @@ void* sbrk(intptr_t increment)
     intptr_t start = syscall(__NR_brk, 0);
     intptr_t new = syscall(__NR_brk, start+increment);
     intptr_t newp = syscall(__NR_brk, 0);
-    return (new == newp && new != start) ? (void*) new : (void*) -1;
+    assert(new == newp);
+    return (new != start) ? (void*) new : (void*) -1;
 }
 
 int rmdir(const char* pathname)
 {
-    return syscall(__NR_rmdir, pathname);
+    return syscall(__NR_rmdir, pathname) < 0 ? -1 : 0;
 }
 
 int unlink(const char* pathname)
 {
-    return syscall(__NR_unlink, pathname);
+    return syscall(__NR_unlink, pathname) < 0 ? -1 : 0;
 }
 
 int usleep(useconds_t usec)
@@ -264,5 +264,4 @@ ssize_t write(int fildes, const void *buf, size_t nbyte)
 {
     return syscall(__NR_write, fildes, buf, nbyte);
 }
-
 

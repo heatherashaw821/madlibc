@@ -1,16 +1,15 @@
 basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
- /usr/include/elf.h /usr/include/features.h \
+ ../include/stdint.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
- /usr/include/x86_64-linux-gnu/gnu/stubs-64.h ../include/stdint.h \
- /usr/include/x86_64-linux-gnu/bits/wchar.h \
+ /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
+ /usr/include/x86_64-linux-gnu/bits/wchar.h /usr/include/elf.h \
  /usr/include/x86_64-linux-gnu/bits/auxv.h /usr/include/unistd.h \
  /usr/include/x86_64-linux-gnu/bits/posix_opt.h \
  /usr/include/x86_64-linux-gnu/bits/environments.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
- /usr/include/x86_64-linux-gnu/bits/typesizes.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h \
+ /usr/include/x86_64-linux-gnu/bits/typesizes.h ../include/stddef.h \
  /usr/include/x86_64-linux-gnu/bits/confname.h /usr/include/getopt.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/4.9/include-fixed/syslimits.h \
@@ -30,13 +29,13 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h ../include/madmath.h \
- ../include/madconsole.h ../include/stdio.h
+ ../include/madconsole.h ../include/madmacro.h ../include/stdio.h
 
 /usr/include/stdc-predef.h:
 
 ../include/stdlib.h:
 
-/usr/include/elf.h:
+../include/stdint.h:
 
 /usr/include/features.h:
 
@@ -48,9 +47,9 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
 
 /usr/include/x86_64-linux-gnu/gnu/stubs-64.h:
 
-../include/stdint.h:
-
 /usr/include/x86_64-linux-gnu/bits/wchar.h:
+
+/usr/include/elf.h:
 
 /usr/include/x86_64-linux-gnu/bits/auxv.h:
 
@@ -64,7 +63,7 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
 
 /usr/include/x86_64-linux-gnu/bits/typesizes.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.9/include/stddef.h:
+../include/stddef.h:
 
 /usr/include/x86_64-linux-gnu/bits/confname.h:
 
@@ -115,5 +114,7 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
 ../include/madmath.h:
 
 ../include/madconsole.h:
+
+../include/madmacro.h:
 
 ../include/stdio.h:

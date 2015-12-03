@@ -127,7 +127,8 @@ am__v_AR_1 =
 libmc_a_AR = $(AR) $(ARFLAGS)
 libmc_a_LIBADD =
 am_libmc_a_OBJECTS = libmc_a-unistd.$(OBJEXT) libmc_a-stdlib.$(OBJEXT) \
-	libmc_a-stdio.$(OBJEXT) libmc_a-string.$(OBJEXT)
+	libmc_a-stdio.$(OBJEXT) libmc_a-string.$(OBJEXT) \
+	libmc_a-signal.$(OBJEXT)
 libmc_a_OBJECTS = $(am_libmc_a_OBJECTS)
 LTLIBRARIES = $(lib_LTLIBRARIES)
 libtime_la_LIBADD =
@@ -325,7 +326,7 @@ ARFLAGS = rcs
 
 # Static
 lib_LIBRARIES = libmc.a
-libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c
+libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c
 libmc_a_CFLAGS = -static -Wall -Werror -masm=intel -nodefaultlibs -nostartfiles -I$(top_srcdir)/include
 
 # Shared
@@ -447,6 +448,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-signal.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-stdio.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-stdlib.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-string.Po@am__quote@
@@ -529,6 +531,20 @@ libmc_a-string.obj: string.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='string.c' object='libmc_a-string.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-string.obj `if test -f 'string.c'; then $(CYGPATH_W) 'string.c'; else $(CYGPATH_W) '$(srcdir)/string.c'; fi`
+
+libmc_a-signal.o: signal.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-signal.o -MD -MP -MF $(DEPDIR)/libmc_a-signal.Tpo -c -o libmc_a-signal.o `test -f 'signal.c' || echo '$(srcdir)/'`signal.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-signal.Tpo $(DEPDIR)/libmc_a-signal.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='signal.c' object='libmc_a-signal.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-signal.o `test -f 'signal.c' || echo '$(srcdir)/'`signal.c
+
+libmc_a-signal.obj: signal.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-signal.obj -MD -MP -MF $(DEPDIR)/libmc_a-signal.Tpo -c -o libmc_a-signal.obj `if test -f 'signal.c'; then $(CYGPATH_W) 'signal.c'; else $(CYGPATH_W) '$(srcdir)/signal.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-signal.Tpo $(DEPDIR)/libmc_a-signal.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='signal.c' object='libmc_a-signal.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-signal.obj `if test -f 'signal.c'; then $(CYGPATH_W) 'signal.c'; else $(CYGPATH_W) '$(srcdir)/signal.c'; fi`
 
 libtime_la-time.lo: time.c
 @am__fastdepCC_TRUE@	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtime_la_CFLAGS) $(CFLAGS) -MT libtime_la-time.lo -MD -MP -MF $(DEPDIR)/libtime_la-time.Tpo -c -o libtime_la-time.lo `test -f 'time.c' || echo '$(srcdir)/'`time.c

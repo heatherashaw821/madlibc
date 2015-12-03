@@ -1,23 +1,18 @@
+
 ////////////////////////////////////////////////////////////////////////////////
 // THE SCOTCH-WARE LICENSE (Revision 0):
 // <aaronryool/gmail.com> wrote this file. As long as you retain this notice you
 // can do whatever you want with this stuff. If we meet some day, and you think
 // this stuff is worth it, you can buy me a shot of scotch in return
 ////////////////////////////////////////////////////////////////////////////////
-// Madlib example 
 
-#include <stdlib.h>
-#include <stdio.h>
+#ifndef MADMACRO_H
+#define MADMACRO_H
 
-int main(int argc, const char** argv, const char** envp)
-{
-    printf("%s %x %x %x\n", "\nWOOT", atoi("0b1111000011110000"), atoi("0xbadc0DE"), 0xdeadbeef);
-    
-    chroot("./");
-    perror("chroot");
-    
-    return 0;
-}
+#define BUILD_BUG_ON_ZERO(e) (sizeof(struct { int:-!!(e); }))
+#define __same_type(a, b) __builtin_types_compatible_p(typeof(a), typeof(b))
+#define __must_be_array(a) BUILD_BUG_ON_ZERO(__same_type((a), &(a)[0]))
+#define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]) + __must_be_array(arr))
 
 
-
+#endif

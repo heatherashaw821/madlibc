@@ -22,7 +22,12 @@ extern void _init(void);
 extern void _fini(void);
 
 char** __environ;
-int errno;
+int errno = 0;
+
+int *__errno_location(void)
+{
+    return &errno;
+}
 
 void __libc_csu_fini(int e)
 {
@@ -262,8 +267,6 @@ void __attribute__((noreturn)) exit(int e)
 }
 
 
-///!!!!!!!!!!!!!!!!!!!!!!!!!!! SYSCALL FUNCTIONS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 #if defined(__x86_64__)
 
 intmax_t __syscall0(intmax_t a)
@@ -275,7 +278,8 @@ intmax_t __syscall0(intmax_t a)
         "syscall\n"
         ::"r"((uint64_t) (a))
     );
-    return ret; 
+    errno = -ret;
+    return ret;
 }
 intmax_t __syscall1(intmax_t a, intmax_t b)
 {
@@ -289,6 +293,7 @@ intmax_t __syscall1(intmax_t a, intmax_t b)
         ::"r"((uint64_t) (a)),
         "r"((uint64_t) (b))
     );
+    errno = -ret;
     return ret;
 }
 intmax_t __syscall2(intmax_t a, intmax_t b, intmax_t c)
@@ -306,6 +311,7 @@ intmax_t __syscall2(intmax_t a, intmax_t b, intmax_t c)
         "r"((uint64_t) (b)),
         "r"((uint64_t) (c))
     );
+    errno = -ret;
     return ret; 
 }
 intmax_t __syscall3(intmax_t a, intmax_t b, intmax_t c, intmax_t d)
@@ -326,6 +332,7 @@ intmax_t __syscall3(intmax_t a, intmax_t b, intmax_t c, intmax_t d)
         "r"((uint64_t) (c)),
         "r"((uint64_t) (d))
     );
+    errno = -ret;
     return ret; 
 }
 intmax_t __syscall4(intmax_t a, intmax_t b, intmax_t c, intmax_t d, intmax_t e)
@@ -349,6 +356,7 @@ intmax_t __syscall4(intmax_t a, intmax_t b, intmax_t c, intmax_t d, intmax_t e)
         "r"((uint64_t) (d)),
         "r"((uint64_t) (e))
     );
+    errno = -ret;
     return ret; 
 }
 intmax_t __syscall5(intmax_t a, intmax_t b, intmax_t c, intmax_t d, intmax_t e, intmax_t f)
@@ -375,6 +383,7 @@ intmax_t __syscall5(intmax_t a, intmax_t b, intmax_t c, intmax_t d, intmax_t e, 
         "r"((uint64_t) (e)),
         "r"((uint64_t) (f))
     );
+    errno = -ret;
     return ret;
 }
     
@@ -405,6 +414,7 @@ intmax_t __syscall6(intmax_t a, intmax_t b, intmax_t c, intmax_t d, intmax_t e, 
         "r"((uint64_t) (f)),
         "r"((uint64_t) (g))
     );
+    errno = -ret;
     return ret;
 }
 
@@ -478,7 +488,32 @@ int rand(void)
 }
 
 
-
+long strtol(const char* s)
+{
+    bool sign = false;
+    long i, r, base = 10;
+    if(s[1] == 'x')
+    {
+        s+=2;
+        base = 16;
+    }
+    else if(s[1] == 'b')
+    {
+        s+=2;
+        base = 2;
+    }
+    
+    if(s[0] == '-')
+    {
+        s+=1;
+        sign = true;
+    }
+    
+    for (i = 0, r = 0;s[i] != '\0';++i)
+        r = r*base + s[i] - (s[i] >= '0' && s[i] <= '9' ? '0' :
+                s[i] >= 'A' && s[i] <= 'Z' ? ('A' - 10) :  ('a' - 10));
+    return (sign ? -r : r);
+}
 
 
 

@@ -21,9 +21,9 @@ void reverse(char* s)
     }
 }
 
-size_t digits(intmax_t n, int base)
+int digits(intmax_t n, int base)
 {
-    size_t size = 0;
+    int size = 0;
     while((n /= base) > 0) size++;
     return size;
 }
@@ -31,15 +31,20 @@ size_t digits(intmax_t n, int base)
 char* itoa(intmax_t n, unsigned int base, bool signess)
 {
     if(base > 16) return NULL; 
-    int i;
-    intmax_t size, sign;
-    size = digits(n, base);
     
-    char* s = (char*) malloc(size+1);
-    memset(s, null, size+1);
+    int i;
+    int size = 0;
+    bool sign = false;
+    char* s;
 
-    if((sign = n) < 0)
+    if(n < 0 && signess)
+    {
+        sign = true;
         n = -n;
+    }
+    size = digits(n, base);
+    s = (char*) malloc(size+2);
+    memset(s, null, size+2);
     
     i = 0;
     do
@@ -47,7 +52,7 @@ char* itoa(intmax_t n, unsigned int base, bool signess)
         s[i++] = n % base < 10 ? (n % base) + '0' : (n % base) - 10 + 'a';
     }while((n /= base) > 0);
     
-    if(sign < 0 && signess)
+    if(sign && signess)
         s[i++] = '-';
     
     reverse(s);

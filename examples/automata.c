@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-//#include <signal.h>
+#include <signal.h>
 
 
 #define BGBLACK  "\033[40m"
@@ -28,18 +28,25 @@ void __attribute__((noreturn)) usage(char** argv)
     exit(1);
 }
 
+void fini(void)
+{
+    printf("%s", SHOW_CURSOR);
+}
+
+static void handler(int signum)
+{
+    fini();
+    _exit(0);
+}
+
 void init(int argc, char** argv, char** envp)
 {
     if(argc != 2)
         usage(argv);
     printf("%s", HIDE_CURSOR);
-//    signal(SIGINT, exit);
+    signal(SIGINT, handler);
 }
 
-void fini()
-{
-    printf("%s", SHOW_CURSOR);
-}
 
 __attribute__((section(".init_array"))) typeof(init)* __init = init;
 __attribute__((section(".fini_array"))) typeof(fini)* __fini = fini;
@@ -76,7 +83,7 @@ int main(int argc, char** argv, char** envp)
     const int width = 25,
         height = 25;
     int i, c;
-    unsigned int frames = 560; //atoi(argv[1]);
+    unsigned int frames = atoi(argv[1]);
     
     if(! frames) usage(argv);
     

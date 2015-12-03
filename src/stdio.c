@@ -9,6 +9,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <errno.h>
+
+const char* const sys_errlist[] = {
+    "Success",
+    "Operation not permitted",
+    "No such file or directory",
+    "No such process",
+    "Interrupted system call",
+    "Input/output error",
+    "No such device or address",
+    "Argument list too long",
+    "Exec format error",
+    "Bad file descriptor",
+    "No child processes",
+    "Resource temporarily unavailable",
+    "Cannot allocate memory",
+    "Permission denied",
+    "Bad address",
+    "Block device required",
+    "Device or resource busy",
+    "File exists",
+    "Invalid cross-device link",
+    "No such device",
+    "Not a directory",
+    "Is a directory",
+    "Invalid argument",
+    "Too many open files in system",
+    "Too many open files",
+    "Inappropriate ioctl for device",
+    "Text file busy",
+    "File too large",
+    "No space left on device",
+    "Illegal seek",
+    "Read-only file system",
+    "Too many links",
+    "Broken pipe",
+    "Numerical argument out of domain",
+    "Numerical result out of range",
+    "Resource deadlock avoided",
+    "File name too long",
+    "No locks available",
+    "Function not implemented",
+    "Directory not empty",
+    "Too many levels of symbolic links",
+    NULL
+};
+
+int sys_nerr;
+
 
 int fputch(FILE* stream, char c)
 {
@@ -26,32 +75,17 @@ int puts(const char* s)
 {
     if(s == NULL) return -1;
     int ret = write(1, s, strlen(s));
-    write(1, "\n", 1);
+    write((intmax_t) stdout, "\n", 1);
     return ret;
 }
 
 
-
 char* __printf_f_s(void* p){ return p; }
-char* __printf_f_c(void* p){ return ((char[]) { (long int) p, null }); }
+char* __printf_f_c(void* p){ return ((char[]) { (intmax_t) p, null }); }
 char* __printf_f_i(void* p){ return itoa((intmax_t) p, 10, true); }
 char* __printf_f_u(void* p){ return itoa((intmax_t) p, 10, false); }
-char* __printf_f_x(void* p)
-{
-                char* i = itoa((intmax_t) p, 16, false);
-                char* out = malloc(strlen(i)+3);
-                memcpy(out, "0x", 3);
-                strcat(out, i);
-                return out;
-}
-char* __printf_f_b(void* p)
-{
-            char* i = itoa((intmax_t) p, 2, false);
-            char* out = malloc(strlen(i)+3);
-            memcpy(out, "0b", 3);
-            strcat(out, i);
-            return out;
-}
+char* __printf_f_x(void* p){ return itoa((intmax_t) p, 16, false); }
+char* __printf_f_b(void* p){ return itoa((intmax_t) p, 2, false); }
 
 char format_flags[25] = "sciuxb";
 char* (*printf_fun_array[25]) (void*) = {
@@ -135,7 +169,7 @@ int fprintf(FILE* stream, const char* __restrict format, ...)
                 {
                     p = (void*) va_arg(argp, void*);
                     char* out = printf_fun_array[cpos(format_flags, format[i])](p);
-                    ccount += fwrite(out, sizeof(char), strlen(out), (FILE*) 1);
+                    ccount += fwrite(out, sizeof(char), strlen(out), stream);
                 }
                 else
                 {
@@ -152,5 +186,14 @@ int fprintf(FILE* stream, const char* __restrict format, ...)
     va_end(argp);
     return ccount;
 }
+
+void perror(const char *s)
+{
+    
+    if(s != NULL && *s != 0)
+        fprintf(stderr, "%s: %s\n", s, sys_errlist[errno]);
+}
+
+
 
 

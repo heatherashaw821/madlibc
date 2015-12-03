@@ -7,11 +7,9 @@
 
 #ifndef STDLIB_H
 #define STDLIB_H
-////////////////////////////////////////////////////////////////////////////////
-// TODO:
-//      package in a similar format to uClibc
 
-// linux header stuff
+// libc stuff
+#include <stdint.h>
 #include <elf.h>
 #include <unistd.h>
 #include <limits.h>
@@ -21,13 +19,11 @@
 #include <sys/select.h>
 #include <sys/syscall.h>
 
-// GAY STUFFF
+// STUFF
 #include <madmath.h>
 #include <madconsole.h>
+#include <madmacro.h>
 
-
-// libc stuff
-#include <stdint.h>
 
 typedef __SIZE_TYPE__ size_t;
 
@@ -40,6 +36,9 @@ typedef void (*fun_ptr) (void);
 
 #define STR_MAX_LENGTH	1024
 
+#define stdin (FILE*) 0
+#define stdout (FILE*) 1
+#define stderr (FILE*) 2
 
 extern int errno;
 
@@ -72,6 +71,8 @@ extern intmax_t __syscall6(intmax_t a,intmax_t b,intmax_t c,intmax_t d,intmax_t 
     M__syscall3, M__syscall2, M__syscall1)(__VA_ARGS__)
 
 
+extern int *__errno_location(void);
+
 extern void* malloc(size_t size);
 extern void free(void* ptr);
 extern void* calloc(size_t nmemb, size_t size);
@@ -83,6 +84,8 @@ extern const char* envpv(const char** envp, const char* key);
 extern void srand(unsigned int __seed);
 extern int rand(void);
 
+extern long strtol(const char* str);
+#define atoi(str) (int) strtol(str)
 
 // for really bad debugging, use this lol
 //#define DEBUG

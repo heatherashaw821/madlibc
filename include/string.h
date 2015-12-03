@@ -1,3 +1,11 @@
+////////////////////////////////////////////////////////////////////////////////
+// THE SCOTCH-WARE LICENSE (Revision 0):
+// <aaronryool/gmail.com> wrote this file. As long as you retain this notice you
+// can do whatever you want with this stuff. If we meet some day, and you think
+// this stuff is worth it, you can buy me a shot of scotch in return
+////////////////////////////////////////////////////////////////////////////////
+
+
 #ifndef MADSTR_H
 #define MADSTR_H
 
@@ -15,7 +23,6 @@ extern char* strcpy(char* dest, const char* src);
 extern char* strcat(char* dest, const char* src);
 extern char* strncat(char* dest, const char* src, size_t n);
 
-extern size_t digits(intmax_t n, int base);
 extern char* itoa(intmax_t n, unsigned int base, bool signess);
 
 #endif

@@ -8,16 +8,19 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <signal.h>
 
-int main(int argc, const char** argv, const char** envp)
+void interupt(int signum)
 {
-    printf("%s %x %x %x\n", "\nWOOT", atoi("0b1111000011110000"), atoi("0xbadc0DE"), 0xdeadbeef);
-    
-    chroot("./");
-    perror("chroot");
-    
-    return 0;
+    printf("\nCaught: %s\n", signum == SIGINT ? "SIGINT" : signum == SIGTERM ? "SIGTERM" : "Unknown");
+    _exit(0);
 }
 
-
-
+int __attribute__ ((noreturn)) main()
+{
+    signal(SIGINT, interupt);
+    signal(SIGTERM, interupt);
+    puts("Press CTRL + c to exit.");
+    while(1);
+    __builtin_unreachable();
+}

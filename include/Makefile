@@ -276,7 +276,7 @@ target_vendor = pc
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-include_HEADERS = stdlib.h string.h stdint.h stdio.h stdarg.h madmath.h 
+include_HEADERS = stdlib.h string.h stdint.h stdio.h stdarg.h madmath.h madmacro.h madconsole.h
 all: all-am
 
 .SUFFIXES:

@@ -79,7 +79,8 @@ POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
 host_triplet = x86_64-pc-linux-gnu
 target_triplet = x86_64-pc-linux-gnu
-bin_PROGRAMS = basic$(EXEEXT) automata$(EXEEXT) time$(EXEEXT)
+bin_PROGRAMS = basic$(EXEEXT) automata$(EXEEXT) time$(EXEEXT) \
+	signal$(EXEEXT)
 subdir = examples
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/depcomp
@@ -103,6 +104,9 @@ am__v_lt_1 =
 am_basic_OBJECTS = basic.$(OBJEXT)
 basic_OBJECTS = $(am_basic_OBJECTS)
 basic_DEPENDENCIES = ../src/libmc.a
+am_signal_OBJECTS = signal.$(OBJEXT)
+signal_OBJECTS = $(am_signal_OBJECTS)
+signal_DEPENDENCIES = ../src/libmc.a
 am_time_OBJECTS = time.$(OBJEXT)
 time_OBJECTS = $(am_time_OBJECTS)
 time_DEPENDENCIES = ../src/libmc.a
@@ -140,8 +144,10 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(time_SOURCES)
-DIST_SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(time_SOURCES)
+SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(signal_SOURCES) \
+	$(time_SOURCES)
+DIST_SOURCES = $(automata_SOURCES) $(basic_SOURCES) $(signal_SOURCES) \
+	$(time_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -292,6 +298,8 @@ time_SOURCES = time.c
 time_LDADD = ../src/libmc.a
 automata_SOURCES = automata.c
 automata_LDADD = ../src/libmc.a
+signal_SOURCES = signal.c
+signal_LDADD = ../src/libmc.a
 all: all-am
 
 .SUFFIXES:
@@ -384,6 +392,10 @@ basic$(EXEEXT): $(basic_OBJECTS) $(basic_DEPENDENCIES) $(EXTRA_basic_DEPENDENCIE
 	@rm -f basic$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(basic_OBJECTS) $(basic_LDADD) $(LIBS)
 
+signal$(EXEEXT): $(signal_OBJECTS) $(signal_DEPENDENCIES) $(EXTRA_signal_DEPENDENCIES) 
+	@rm -f signal$(EXEEXT)
+	$(AM_V_CCLD)$(LINK) $(signal_OBJECTS) $(signal_LDADD) $(LIBS)
+
 time$(EXEEXT): $(time_OBJECTS) $(time_DEPENDENCIES) $(EXTRA_time_DEPENDENCIES) 
 	@rm -f time$(EXEEXT)
 	$(AM_V_CCLD)$(LINK) $(time_OBJECTS) $(time_LDADD) $(LIBS)
@@ -396,6 +408,7 @@ distclean-compile:
 
 include ./$(DEPDIR)/automata.Po
 include ./$(DEPDIR)/basic.Po
+include ./$(DEPDIR)/signal.Po
 include ./$(DEPDIR)/time.Po
 
 .c.o:

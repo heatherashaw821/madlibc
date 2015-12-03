@@ -1,5 +1,5 @@
-libmc_a-string.o: string.c /usr/include/stdc-predef.h ../include/string.h \
- ../include/stdlib.h ../include/stdint.h /usr/include/features.h \
+signal.o: signal.c /usr/include/stdc-predef.h ../include/stdlib.h \
+ ../include/stdint.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
@@ -29,11 +29,17 @@ libmc_a-string.o: string.c /usr/include/stdc-predef.h ../include/string.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h ../include/madmath.h \
- ../include/madconsole.h ../include/madmacro.h
+ ../include/madconsole.h ../include/madmacro.h ../include/stdio.h \
+ ../include/signal.h /usr/include/x86_64-linux-gnu/bits/signum.h \
+ /usr/include/x86_64-linux-gnu/bits/siginfo.h \
+ /usr/include/x86_64-linux-gnu/bits/sigaction.h \
+ /usr/include/x86_64-linux-gnu/bits/sigcontext.h \
+ /usr/include/x86_64-linux-gnu/bits/sigstack.h \
+ /usr/include/x86_64-linux-gnu/sys/ucontext.h \
+ /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h \
+ /usr/include/x86_64-linux-gnu/bits/sigthread.h
 
 /usr/include/stdc-predef.h:
-
-../include/string.h:
 
 ../include/stdlib.h:
 
@@ -118,3 +124,23 @@ libmc_a-string.o: string.c /usr/include/stdc-predef.h ../include/string.h \
 ../include/madconsole.h:
 
 ../include/madmacro.h:
+
+../include/stdio.h:
+
+../include/signal.h:
+
+/usr/include/x86_64-linux-gnu/bits/signum.h:
+
+/usr/include/x86_64-linux-gnu/bits/siginfo.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigaction.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigcontext.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigstack.h:
+
+/usr/include/x86_64-linux-gnu/sys/ucontext.h:
+
+/usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
+
+/usr/include/x86_64-linux-gnu/bits/sigthread.h:
