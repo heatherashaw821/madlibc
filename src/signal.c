@@ -26,14 +26,24 @@ struct kernel_sigaction {
     sigset_t sa_mask;
 };
 
+
+int sigaltstack(const stack_t *ss, stack_t *oss)
+{
+    return 0;
+}
+
 #define SA_RESTORER	0x04000000
 void __default_sa_restorer(void)
 {
-    
+#ifdef __NR_sigreturn
+    syscall(__NR_sigreturn, NULL);
+#else
+    syscall(__NR_rt_sigreturn, NULL);
+#endif
 }
 void __default_rt_sa_restorer(void)
 {
-    
+    syscall(__NR_rt_sigreturn, NULL);
 }
 
 // When RT signals are in use we need to use a different return stub.  
