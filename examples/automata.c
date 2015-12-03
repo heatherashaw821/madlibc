@@ -11,17 +11,6 @@
 #include <signal.h>
 
 
-#define BGBLACK  "\033[40m"
-#define BGRED	 "\033[41m"
-#define BGWHITE  "\033[47m"
-#define RESET    "\033[0m"
-
-#define CLEAR           "\033[2J"
-#define HIDE_CURSOR     "\e[?25l"
-#define SHOW_CURSOR     "\e[?25h"
-
-#define CURSOR(x, y) printf("\033[%i;%iH\n", y, x)
-
 void __attribute__((noreturn)) usage(char** argv)
 {
     printf("%s <#frames>\n", argv[0]);

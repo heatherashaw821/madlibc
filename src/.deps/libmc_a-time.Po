@@ -1,5 +1,5 @@
-basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
- ../include/stdint.h /usr/include/features.h \
+libmc_a-time.o: time.c /usr/include/stdc-predef.h ../include/string.h \
+ ../include/stdlib.h ../include/stdint.h /usr/include/features.h \
  /usr/include/x86_64-linux-gnu/sys/cdefs.h \
  /usr/include/x86_64-linux-gnu/bits/wordsize.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
@@ -29,10 +29,14 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
  /usr/include/x86_64-linux-gnu/asm/unistd.h \
  /usr/include/x86_64-linux-gnu/asm/unistd_64.h \
  /usr/include/x86_64-linux-gnu/bits/syscall.h ../include/madmath.h \
- ../include/madconsole.h ../include/madmacro.h ../include/string.h \
- ../include/stdio.h /usr/include/xlocale.h
+ ../include/madconsole.h ../include/madmacro.h ../include/errno.h \
+ /usr/include/x86_64-linux-gnu/bits/errno.h /usr/include/linux/errno.h \
+ /usr/include/x86_64-linux-gnu/asm/errno.h \
+ /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h
 
 /usr/include/stdc-predef.h:
+
+../include/string.h:
 
 ../include/stdlib.h:
 
@@ -118,8 +122,14 @@ basic.o: basic.c /usr/include/stdc-predef.h ../include/stdlib.h \
 
 ../include/madmacro.h:
 
-../include/string.h:
+../include/errno.h:
 
-../include/stdio.h:
+/usr/include/x86_64-linux-gnu/bits/errno.h:
 
-/usr/include/xlocale.h:
+/usr/include/linux/errno.h:
+
+/usr/include/x86_64-linux-gnu/asm/errno.h:
+
+/usr/include/asm-generic/errno.h:
+
+/usr/include/asm-generic/errno-base.h:

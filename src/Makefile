@@ -15,7 +15,6 @@
 
 
 
-
 am__is_gnu_make = test -n '$(MAKEFILE_LIST)' && test -n '$(MAKELEVEL)'
 am__make_running_with_option = \
   case $${target_option-} in \
@@ -118,7 +117,7 @@ am__uninstall_files_from_dir = { \
     || { echo " ( cd '$$dir' && rm -f" $$files ")"; \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
-am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(libdir)"
+am__installdirs = "$(DESTDIR)$(libdir)"
 LIBRARIES = $(lib_LIBRARIES)
 AM_V_AR = $(am__v_AR_$(V))
 am__v_AR_ = $(am__v_AR_$(AM_DEFAULT_VERBOSITY))
@@ -128,19 +127,8 @@ libmc_a_AR = $(AR) $(ARFLAGS)
 libmc_a_LIBADD =
 am_libmc_a_OBJECTS = libmc_a-unistd.$(OBJEXT) libmc_a-stdlib.$(OBJEXT) \
 	libmc_a-stdio.$(OBJEXT) libmc_a-string.$(OBJEXT) \
-	libmc_a-signal.$(OBJEXT)
+	libmc_a-signal.$(OBJEXT) libmc_a-time.$(OBJEXT)
 libmc_a_OBJECTS = $(am_libmc_a_OBJECTS)
-LTLIBRARIES = $(lib_LTLIBRARIES)
-libtime_la_LIBADD =
-am_libtime_la_OBJECTS = libtime_la-time.lo
-libtime_la_OBJECTS = $(am_libtime_la_OBJECTS)
-AM_V_lt = $(am__v_lt_$(V))
-am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
-am__v_lt_0 = --silent
-am__v_lt_1 = 
-libtime_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libtime_la_CFLAGS) \
-	$(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -157,6 +145,10 @@ DEFAULT_INCLUDES = -I. -I$(top_builddir)
 depcomp = $(SHELL) $(top_srcdir)/depcomp
 am__depfiles_maybe = depfiles
 am__mv = mv -f
+AM_V_lt = $(am__v_lt_$(V))
+am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
+am__v_lt_0 = --silent
+am__v_lt_1 = 
 COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
 	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
 LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
@@ -175,8 +167,8 @@ AM_V_CCLD = $(am__v_CCLD_$(V))
 am__v_CCLD_ = $(am__v_CCLD_$(AM_DEFAULT_VERBOSITY))
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
-SOURCES = $(libmc_a_SOURCES) $(libtime_la_SOURCES)
-DIST_SOURCES = $(libmc_a_SOURCES) $(libtime_la_SOURCES)
+SOURCES = $(libmc_a_SOURCES)
+DIST_SOURCES = $(libmc_a_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -326,13 +318,8 @@ ARFLAGS = rcs
 
 # Static
 lib_LIBRARIES = libmc.a
-libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c
+libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c time.c
 libmc_a_CFLAGS = -static -Wall -Werror -masm=intel -nodefaultlibs -nostartfiles -I$(top_srcdir)/include
-
-# Shared
-lib_LTLIBRARIES = libtime.la
-libtime_la_SOURCES = time.c
-libtime_la_CFLAGS = -static -Wall -Werror -masm=intel -nodefaultlibs -nostartfiles -I$(top_srcdir)/include
 all: all-am
 
 .SUFFIXES:
@@ -404,44 +391,6 @@ libmc.a: $(libmc_a_OBJECTS) $(libmc_a_DEPENDENCIES) $(EXTRA_libmc_a_DEPENDENCIES
 	$(AM_V_AR)$(libmc_a_AR) libmc.a $(libmc_a_OBJECTS) $(libmc_a_LIBADD)
 	$(AM_V_at)$(RANLIB) libmc.a
 
-install-libLTLIBRARIES: $(lib_LTLIBRARIES)
-	@$(NORMAL_INSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
-	list2=; for p in $$list; do \
-	  if test -f $$p; then \
-	    list2="$$list2 $$p"; \
-	  else :; fi; \
-	done; \
-	test -z "$$list2" || { \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(libdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(libdir)" || exit 1; \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 '$(DESTDIR)$(libdir)'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=install $(INSTALL) $(INSTALL_STRIP_FLAG) $$list2 "$(DESTDIR)$(libdir)"; \
-	}
-
-uninstall-libLTLIBRARIES:
-	@$(NORMAL_UNINSTALL)
-	@list='$(lib_LTLIBRARIES)'; test -n "$(libdir)" || list=; \
-	for p in $$list; do \
-	  $(am__strip_dir) \
-	  echo " $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f '$(DESTDIR)$(libdir)/$$f'"; \
-	  $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=uninstall rm -f "$(DESTDIR)$(libdir)/$$f"; \
-	done
-
-clean-libLTLIBRARIES:
-	-test -z "$(lib_LTLIBRARIES)" || rm -f $(lib_LTLIBRARIES)
-	@list='$(lib_LTLIBRARIES)'; \
-	locs=`for p in $$list; do echo $$p; done | \
-	      sed 's|^[^/]*$$|.|; s|/[^/]*$$||; s|$$|/so_locations|' | \
-	      sort -u`; \
-	test -z "$$locs" || { \
-	  echo rm -f $${locs}; \
-	  rm -f $${locs}; \
-	}
-
-libtime.la: $(libtime_la_OBJECTS) $(libtime_la_DEPENDENCIES) $(EXTRA_libtime_la_DEPENDENCIES) 
-	$(AM_V_CCLD)$(libtime_la_LINK) -rpath $(libdir) $(libtime_la_OBJECTS) $(libtime_la_LIBADD) $(LIBS)
-
 mostlyclean-compile:
 	-rm -f *.$(OBJEXT)
 
@@ -452,8 +401,8 @@ include ./$(DEPDIR)/libmc_a-signal.Po
 include ./$(DEPDIR)/libmc_a-stdio.Po
 include ./$(DEPDIR)/libmc_a-stdlib.Po
 include ./$(DEPDIR)/libmc_a-string.Po
+include ./$(DEPDIR)/libmc_a-time.Po
 include ./$(DEPDIR)/libmc_a-unistd.Po
-include ./$(DEPDIR)/libtime_la-time.Plo
 
 .c.o:
 	$(AM_V_CC)$(COMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
@@ -546,12 +495,19 @@ libmc_a-signal.obj: signal.c
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-signal.obj `if test -f 'signal.c'; then $(CYGPATH_W) 'signal.c'; else $(CYGPATH_W) '$(srcdir)/signal.c'; fi`
 
-libtime_la-time.lo: time.c
-	$(AM_V_CC)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtime_la_CFLAGS) $(CFLAGS) -MT libtime_la-time.lo -MD -MP -MF $(DEPDIR)/libtime_la-time.Tpo -c -o libtime_la-time.lo `test -f 'time.c' || echo '$(srcdir)/'`time.c
-	$(AM_V_at)$(am__mv) $(DEPDIR)/libtime_la-time.Tpo $(DEPDIR)/libtime_la-time.Plo
-#	$(AM_V_CC)source='time.c' object='libtime_la-time.lo' libtool=yes \
+libmc_a-time.o: time.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-time.o -MD -MP -MF $(DEPDIR)/libmc_a-time.Tpo -c -o libmc_a-time.o `test -f 'time.c' || echo '$(srcdir)/'`time.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-time.Tpo $(DEPDIR)/libmc_a-time.Po
+#	$(AM_V_CC)source='time.c' object='libmc_a-time.o' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
-#	$(AM_V_CC_no)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtime_la_CFLAGS) $(CFLAGS) -c -o libtime_la-time.lo `test -f 'time.c' || echo '$(srcdir)/'`time.c
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-time.o `test -f 'time.c' || echo '$(srcdir)/'`time.c
+
+libmc_a-time.obj: time.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-time.obj -MD -MP -MF $(DEPDIR)/libmc_a-time.Tpo -c -o libmc_a-time.obj `if test -f 'time.c'; then $(CYGPATH_W) 'time.c'; else $(CYGPATH_W) '$(srcdir)/time.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-time.Tpo $(DEPDIR)/libmc_a-time.Po
+#	$(AM_V_CC)source='time.c' object='libmc_a-time.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-time.obj `if test -f 'time.c'; then $(CYGPATH_W) 'time.c'; else $(CYGPATH_W) '$(srcdir)/time.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo
@@ -643,9 +599,9 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(LIBRARIES) $(LTLIBRARIES)
+all-am: Makefile $(LIBRARIES)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(libdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -680,8 +636,8 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
-clean-am: clean-generic clean-libLIBRARIES clean-libLTLIBRARIES \
-	clean-libtool mostlyclean-am
+clean-am: clean-generic clean-libLIBRARIES clean-libtool \
+	mostlyclean-am
 
 distclean: distclean-am
 	-rm -rf ./$(DEPDIR)
@@ -707,7 +663,7 @@ install-dvi: install-dvi-am
 
 install-dvi-am:
 
-install-exec-am: install-libLIBRARIES install-libLTLIBRARIES
+install-exec-am: install-libLIBRARIES
 
 install-html: install-html-am
 
@@ -747,26 +703,29 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-libLIBRARIES uninstall-libLTLIBRARIES
+uninstall-am: uninstall-libLIBRARIES
 
 .MAKE: install-am install-strip
 
 .PHONY: CTAGS GTAGS TAGS all all-am check check-am clean clean-generic \
-	clean-libLIBRARIES clean-libLTLIBRARIES clean-libtool \
-	cscopelist-am ctags ctags-am distclean distclean-compile \
-	distclean-generic distclean-libtool distclean-tags distdir dvi \
-	dvi-am html html-am info info-am install install-am \
-	install-data install-data-am install-dvi install-dvi-am \
-	install-exec install-exec-am install-html install-html-am \
-	install-info install-info-am install-libLIBRARIES \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip installcheck \
-	installcheck-am installdirs maintainer-clean \
+	clean-libLIBRARIES clean-libtool cscopelist-am ctags ctags-am \
+	distclean distclean-compile distclean-generic \
+	distclean-libtool distclean-tags distdir dvi dvi-am html \
+	html-am info info-am install install-am install-data \
+	install-data-am install-dvi install-dvi-am install-exec \
+	install-exec-am install-html install-html-am install-info \
+	install-info-am install-libLIBRARIES install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-libLIBRARIES \
-	uninstall-libLTLIBRARIES
+	tags tags-am uninstall uninstall-am uninstall-libLIBRARIES
 
+
+# Shared
+#lib_LTLIBRARIES   = libtime.la
+#libtime_la_SOURCES = time.c
+#libtime_la_CFLAGS  = -static -Wall -Werror -masm=intel -nodefaultlibs -nostartfiles -I$(top_srcdir)/include
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

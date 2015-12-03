@@ -62,6 +62,11 @@ int fputch(FILE* stream, char c)
     return write((intmax_t) stream, &c, 1);
 }
 
+int fputc(int c, FILE* stream)
+{
+    return write((intmax_t) stream, &c, 1);
+}
+
 size_t fwrite(const void *array, size_t size, size_t count, FILE *stream)
 {
     // flesh out later
@@ -79,7 +84,7 @@ int puts(const char* s)
 
 
 char* __printf_f_s(void* p){ return p; }
-char* __printf_f_c(void* p){ return ((char[]) { (intmax_t) p, null }); }
+char* __printf_f_c(void* p){ return (char[]) {(intmax_t) p, 0}; }
 char* __printf_f_i(void* p){ return itoa((intmax_t) p, 10, true); }
 char* __printf_f_u(void* p){ return itoa((intmax_t) p, 10, false); }
 char* __printf_f_x(void* p){ return itoa((intmax_t) p, 16, false); }
