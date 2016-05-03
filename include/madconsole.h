@@ -33,6 +33,26 @@
 #define CYAN		"\033[036m"
 #define WHITE		"\033[037m"
 
+// High Intensity
+#define IBLACK		"\033[090m"
+#define IRED		"\033[091m"
+#define IGREEN		"\033[092m"
+#define IYELLOW		"\033[093m"
+#define IBLUE		"\033[094m"
+#define IPURPLE		"\033[095m"
+#define ICYAN		"\033[096m"
+#define IWHITE		"\033[097m"
+
+// Bold High Intensity
+#define BIBLACK		"\033[190m"
+#define BIRED		"\033[191m"
+#define BIGREEN		"\033[192m"
+#define BIYELLOW	"\033[193m"
+#define BIBLUE		"\033[194m"
+#define BIPURPLE	"\033[195m"
+#define BICYAN		"\033[196m"
+#define BIWHITE		"\033[197m"
+
 // Underline
 #define UBLACK		"\033[430m"
 #define URED		"\033[431m"
@@ -54,26 +74,6 @@
 #define BGPURPLE	"\033[45m"
 #define BGCYAN		"\033[46m"
 #define BGWHITE		"\033[47m"
-
-// High Intensity
-#define IBLACK		"\033[090m"
-#define IRED		"\033[091m"
-#define IGREEN		"\033[092m"
-#define IYELLOW		"\033[093m"
-#define IBLUE		"\033[094m"
-#define IPURPLE		"\033[095m"
-#define ICYAN		"\033[096m"
-#define IWHITE		"\033[097m"
-
-// Bold High Intensity
-#define BIBLACK		"\033[190m"
-#define BIRED		"\033[191m"
-#define BIGREEN		"\033[192m"
-#define BIYELLOW	"\033[193m"
-#define BIBLUE		"\033[194m"
-#define BIPURPLE	"\033[195m"
-#define BICYAN		"\033[196m"
-#define BIWHITE		"\033[197m"
 
 // High Intensity backgrounds
 #define BGIBLACK	"\033[0100m"

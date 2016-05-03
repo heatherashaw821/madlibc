@@ -127,7 +127,8 @@ libmc_a_AR = $(AR) $(ARFLAGS)
 libmc_a_LIBADD =
 am_libmc_a_OBJECTS = libmc_a-unistd.$(OBJEXT) libmc_a-stdlib.$(OBJEXT) \
 	libmc_a-stdio.$(OBJEXT) libmc_a-string.$(OBJEXT) \
-	libmc_a-signal.$(OBJEXT) libmc_a-time.$(OBJEXT)
+	libmc_a-signal.$(OBJEXT) libmc_a-time.$(OBJEXT) \
+	libmc_a-dict.$(OBJEXT)
 libmc_a_OBJECTS = $(am_libmc_a_OBJECTS)
 AM_V_P = $(am__v_P_@AM_V@)
 am__v_P_ = $(am__v_P_@AM_DEFAULT_V@)
@@ -318,7 +319,7 @@ ARFLAGS = rcs
 
 # Static
 lib_LIBRARIES = libmc.a
-libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c time.c
+libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c time.c dict.c
 libmc_a_CFLAGS = -static -Wall -Werror -masm=intel -nodefaultlibs -nostartfiles -I$(top_srcdir)/include
 all: all-am
 
@@ -397,6 +398,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-dict.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-signal.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-stdio.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libmc_a-stdlib.Po@am__quote@
@@ -508,6 +510,20 @@ libmc_a-time.obj: time.c
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='time.c' object='libmc_a-time.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-time.obj `if test -f 'time.c'; then $(CYGPATH_W) 'time.c'; else $(CYGPATH_W) '$(srcdir)/time.c'; fi`
+
+libmc_a-dict.o: dict.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-dict.o -MD -MP -MF $(DEPDIR)/libmc_a-dict.Tpo -c -o libmc_a-dict.o `test -f 'dict.c' || echo '$(srcdir)/'`dict.c
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-dict.Tpo $(DEPDIR)/libmc_a-dict.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dict.c' object='libmc_a-dict.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-dict.o `test -f 'dict.c' || echo '$(srcdir)/'`dict.c
+
+libmc_a-dict.obj: dict.c
+@am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-dict.obj -MD -MP -MF $(DEPDIR)/libmc_a-dict.Tpo -c -o libmc_a-dict.obj `if test -f 'dict.c'; then $(CYGPATH_W) 'dict.c'; else $(CYGPATH_W) '$(srcdir)/dict.c'; fi`
+@am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-dict.Tpo $(DEPDIR)/libmc_a-dict.Po
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dict.c' object='libmc_a-dict.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-dict.obj `if test -f 'dict.c'; then $(CYGPATH_W) 'dict.c'; else $(CYGPATH_W) '$(srcdir)/dict.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

@@ -127,7 +127,8 @@ libmc_a_AR = $(AR) $(ARFLAGS)
 libmc_a_LIBADD =
 am_libmc_a_OBJECTS = libmc_a-unistd.$(OBJEXT) libmc_a-stdlib.$(OBJEXT) \
 	libmc_a-stdio.$(OBJEXT) libmc_a-string.$(OBJEXT) \
-	libmc_a-signal.$(OBJEXT) libmc_a-time.$(OBJEXT)
+	libmc_a-signal.$(OBJEXT) libmc_a-time.$(OBJEXT) \
+	libmc_a-dict.$(OBJEXT)
 libmc_a_OBJECTS = $(am_libmc_a_OBJECTS)
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
@@ -201,7 +202,7 @@ AR = ar
 AUTOCONF = ${SHELL} /home/madmouse/Desktop/Projects/libc/missing autoconf
 AUTOHEADER = ${SHELL} /home/madmouse/Desktop/Projects/libc/missing autoheader
 AUTOMAKE = ${SHELL} /home/madmouse/Desktop/Projects/libc/missing automake-1.14
-AWK = mawk
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -318,7 +319,7 @@ ARFLAGS = rcs
 
 # Static
 lib_LIBRARIES = libmc.a
-libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c time.c
+libmc_a_SOURCES = unistd.c stdlib.c stdio.c string.c signal.c time.c dict.c
 libmc_a_CFLAGS = -static -Wall -Werror -masm=intel -nodefaultlibs -nostartfiles -I$(top_srcdir)/include
 all: all-am
 
@@ -397,6 +398,7 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+include ./$(DEPDIR)/libmc_a-dict.Po
 include ./$(DEPDIR)/libmc_a-signal.Po
 include ./$(DEPDIR)/libmc_a-stdio.Po
 include ./$(DEPDIR)/libmc_a-stdlib.Po
@@ -508,6 +510,20 @@ libmc_a-time.obj: time.c
 #	$(AM_V_CC)source='time.c' object='libmc_a-time.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
 #	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-time.obj `if test -f 'time.c'; then $(CYGPATH_W) 'time.c'; else $(CYGPATH_W) '$(srcdir)/time.c'; fi`
+
+libmc_a-dict.o: dict.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-dict.o -MD -MP -MF $(DEPDIR)/libmc_a-dict.Tpo -c -o libmc_a-dict.o `test -f 'dict.c' || echo '$(srcdir)/'`dict.c
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-dict.Tpo $(DEPDIR)/libmc_a-dict.Po
+#	$(AM_V_CC)source='dict.c' object='libmc_a-dict.o' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-dict.o `test -f 'dict.c' || echo '$(srcdir)/'`dict.c
+
+libmc_a-dict.obj: dict.c
+	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -MT libmc_a-dict.obj -MD -MP -MF $(DEPDIR)/libmc_a-dict.Tpo -c -o libmc_a-dict.obj `if test -f 'dict.c'; then $(CYGPATH_W) 'dict.c'; else $(CYGPATH_W) '$(srcdir)/dict.c'; fi`
+	$(AM_V_at)$(am__mv) $(DEPDIR)/libmc_a-dict.Tpo $(DEPDIR)/libmc_a-dict.Po
+#	$(AM_V_CC)source='dict.c' object='libmc_a-dict.obj' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) \
+#	$(AM_V_CC_no)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libmc_a_CFLAGS) $(CFLAGS) -c -o libmc_a-dict.obj `if test -f 'dict.c'; then $(CYGPATH_W) 'dict.c'; else $(CYGPATH_W) '$(srcdir)/dict.c'; fi`
 
 mostlyclean-libtool:
 	-rm -f *.lo

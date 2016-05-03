@@ -165,7 +165,7 @@ AR = ar
 AUTOCONF = ${SHELL} /home/madmouse/Desktop/Projects/libc/missing autoconf
 AUTOHEADER = ${SHELL} /home/madmouse/Desktop/Projects/libc/missing autoheader
 AUTOMAKE = ${SHELL} /home/madmouse/Desktop/Projects/libc/missing automake-1.14
-AWK = mawk
+AWK = gawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
@@ -276,7 +276,7 @@ target_vendor = pc
 top_build_prefix = ../
 top_builddir = ..
 top_srcdir = ..
-include_HEADERS = stdlib.h string.h stdint.h stdio.h stdarg.h madmath.h madmacro.h madconsole.h
+include_HEADERS = stdlib.h string.h stdint.h stdio.h stdarg.h madmath.h madmacro.h madconsole.h dict.h
 all: all-am
 
 .SUFFIXES:
